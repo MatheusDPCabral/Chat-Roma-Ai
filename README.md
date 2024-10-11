@@ -1,2 +1,8 @@
 # Chat-Roma-Ai
-Projeto da faculdade para a cadeira de Sistemas Distribuídos.
+integrantes:
+CARLOS CAMILO
+CARLOS HOLANDA
+DAVID ALEXANDRE
+JOSE LUÍS
+MATHEUS CABRAL
+MATHEUS SANTANA
