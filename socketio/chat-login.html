@@ -20,6 +20,12 @@
                 alert("Por favor, insira um nome de usuário.");
             }
         }
+        // Adiciona evento ao campo de texto para enviar ao pressionar "Enter"
+        document.querySelector("#username").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                login(); // Chama a função login quando a tecla Enter for pressionada
+            }
+        });
     </script>
 </body>
 </html>

@@ -36,5 +36,10 @@
                 alert("Por favor, insira uma mensagem.");
             }
         }
+         document.querySelector("#message").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                enviar();
+            }
+        });
     </script>
 </html>

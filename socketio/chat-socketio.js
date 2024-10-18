@@ -32,3 +32,9 @@ app.get("/chat", (req, res) => {
 server.listen(4001, () => {
     console.log("Servidor Socket.IO rodando na porta 4001");
 });
+    sendButton.addEventListener('click', enviar);
+    messageInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        enviar();
+    }
+});
