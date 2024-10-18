@@ -28,6 +28,7 @@ body, html {
 .chat-box li {
   margin: 5px 0; /* Margem entre as mensagens */
   display: flex; /* Alinha as mensagens horizontalmente */
+  text-align: end;
 }
 
 .sent {
@@ -36,6 +37,8 @@ body, html {
   padding: 10px; /* Preenchimento das mensagens */
   border-radius: 10px; /* Bordas arredondadas */
   max-width: 70%; /* Largura máxima das mensagens enviadas */
+  display: block;
+  margin-left: 220px;
 }
 
 .received {
