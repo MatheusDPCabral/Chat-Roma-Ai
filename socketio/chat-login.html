@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Chat</title>
+</head>
+<body>
+    <h2>Login</h2>
+    Usuário: <input type="text" id="username" />
+    <button onclick="login()">Entrar</button>
+
+    <script>
+        function login() {
+            let user = document.querySelector("#username").value;
+            if (user.trim() !== "") {
+                window.location.href = "/chat?user=" + encodeURIComponent(user);
+            } else {
+                alert("Por favor, insira um nome de usuário.");
+            }
+        }
+    </script>
+</body>
+</html>

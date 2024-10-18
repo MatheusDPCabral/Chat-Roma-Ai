@@ -1,0 +1,19 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-wbs": "node ./websocket/chat-websocket.js",
+    "start-sktio": "node ./socketio/chat-socketio.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.0.6",
+    "express": "^4.21.1",
+    "socket.io": "^4.8.0",
+    "ws": "^8.18.0"
+  }
+}
