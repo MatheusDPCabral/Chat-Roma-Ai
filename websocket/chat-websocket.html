@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat WebSocket</title>
+</head>
+<body>
+    <input type="text" id="message" />
+    <button onclick="enviar()">Enviar</button>
+    <ul></ul>
+
+    <script>
+        let ws;
+
+        function connectWebSocket() {
+            ws = new WebSocket("ws://localhost:3000");
+
+            ws.onopen = () => {
+                console.log("Conexão WebSocket estabelecida.");
+            };
+
+            ws.onmessage = (event) => {
+                const message = event.data;
+                const ul = document.querySelector("ul");
+                ul.innerHTML += `<li>${message}</li>`;
+            };
+
+            ws.onclose = () => {
+                console.log("Conexão WebSocket fechada. Tentando reconectar...");
+                setTimeout(connectWebSocket, 3000); // Tenta reconectar após 3 segundos
+            };
+
+            ws.onerror = (error) => {
+                console.error("Erro no WebSocket:", error);
+            };
+        }
+
+        connectWebSocket();
+
+        function enviar() {
+            const msg = document.querySelector("#message").value;
+            if (msg.trim() !== "" && ws.readyState === WebSocket.OPEN) {
+                ws.send(msg);
+                document.querySelector("#message").value = "";
+            } else {
+                console.log("WebSocket está fechado ou a mensagem está vazia.");
+            }
+        }
+    </script>
+</body>
+</html>

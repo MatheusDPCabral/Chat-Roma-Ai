@@ -1,0 +1,40 @@
+<html>
+    <input type="hidden" id="user" value="user-chat" />
+    <input type="text" id="message" />
+    <button onclick="enviar()">Enviar</button>
+    <ul></ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"></script>
+
+    <script>
+        window.onload = () => {
+            let username = document.querySelector("#user").value;
+            if (!username || username === 'undefined') {
+                window.location.href = "/";
+            }
+        };
+
+        const socket = io("http://localhost:4001"); 
+
+        socket.on("connect", () => {
+            console.log("Conectado ao servidor");
+        });
+
+        socket.on("message", (msg) => {
+            const ul = document.querySelector("ul");
+            ul.innerHTML += `<li>${msg.username}: ${msg.message}</li>`;
+        });
+
+        function enviar() {
+            let username = document.querySelector("#user").value;
+            let msg = document.querySelector("#message").value;
+
+            if (msg.trim() !== "") {
+                socket.emit("message", { username: username, message: msg });
+                document.querySelector("#message").value = "";
+            } else {
+                alert("Por favor, insira uma mensagem.");
+            }
+        }
+    </script>
+</html>
