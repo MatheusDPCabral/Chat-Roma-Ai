@@ -1,45 +1,86 @@
-<html>
-    <input type="hidden" id="user" value="user-chat" />
-    <input type="text" id="message" />
-    <button onclick="enviar()">Enviar</button>
-    <ul></ul>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Chat Socket.IO</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/css/chat.css"> <!-- Linkando o arquivo CSS externo -->
+        </head>
+        <body>
+            <div class="chat-container">
+                <div class="card shadow-lg p-3 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-center" style="flex-grow: 1;">Chat</h4> <!-- Centralizando o título -->
+                        <span id="personName"></span> <!-- Nome da outra pessoa -->
+                    </div>
+                    <div class="card-body chat-box">
+                        <ul class="list-unstyled"></ul>
+                    </div>
+                    <div class="input-group mt-3">
+                        <input type="hidden" id="user" value="user-chat" />
+                        <input type="text" id="message" class="form-control" placeholder="Digite sua mensagem" />
+                        <button class="btn btn-success" onclick="enviar()">Enviar</button>
+                    </div>
+                </div>
+            </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"></script>
 
-    <script>
-        window.onload = () => {
-            let username = document.querySelector("#user").value;
-            if (!username || username === 'undefined') {
-                window.location.href = "/";
-            }
-        };
+            <script>
+                window.onload = () => {
+                    let username = document.querySelector("#user").value;
+                    if (!username || username === 'undefined') {
+                        window.location.href = "/";
+                    }
 
-        const socket = io("http://localhost:4001"); 
+                    document.getElementById("personName").textContent = username; 
+                };
 
-        socket.on("connect", () => {
-            console.log("Conectado ao servidor");
-        });
+                const socket = io(window.location.hostname);
 
-        socket.on("message", (msg) => {
-            const ul = document.querySelector("ul");
-            ul.innerHTML += `<li>${msg.username}: ${msg.message}</li>`;
-        });
+                socket.on("message", (msg) => {
+                    const ul = document.querySelector("ul");
+                    const li = document.createElement("li");
 
-        function enviar() {
-            let username = document.querySelector("#user").value;
-            let msg = document.querySelector("#message").value;
+                    // Alinhamento baseado em quem enviou a mensagem
+                    if (msg.username === document.querySelector("#user").value) {
+                        li.classList.add("sent"); // Classe para mensagens enviadas
+                        li.innerHTML = `<strong>${msg.username}:</strong> ${msg.message}`; // Mostra o nome do usuário
+                    } else {
+                        li.classList.add("received"); // Classe para mensagens recebidas
+                        li.innerHTML = `<strong>${msg.username}:</strong> ${msg.message}`; // Mostra o nome da outra pessoa
+                    }
 
-            if (msg.trim() !== "") {
-                socket.emit("message", { username: username, message: msg });
-                document.querySelector("#message").value = "";
-            } else {
-                alert("Por favor, insira uma mensagem.");
-            }
-        }
-         document.querySelector("#message").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                enviar();
-            }
-        });
-    </script>
-</html>
+                    ul.appendChild(li);
+                    ul.scrollTop = ul.scrollHeight; // Scroll automático para a última mensagem
+                });
+
+
+                socket.on("newUser", (username) => {
+                    document.getElementById("personName").textContent = username;
+                });
+
+                function enviar() {
+                    let username = document.querySelector("#user").value;
+                    let msg = document.querySelector("#message").value;
+
+                    if (msg.trim() !== "") {
+                        socket.emit("message", { username: username, message: msg }); // Envia a mensagem
+                        document.querySelector("#message").value = ""; // Limpa o campo de mensagem
+                    } else {
+                        alert("Por favor, insira uma mensagem.");
+                    }
+                }
+
+                // Adiciona evento de escuta para a tecla Enter no campo de mensagem
+                document.getElementById("message").addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") {
+                        event.preventDefault(); // Impede o comportamento padrão do Enter
+                        enviar(); // Chama a função de enviar mensagem
+                    }
+                });
+            </script>
+        </body>
+        </html>

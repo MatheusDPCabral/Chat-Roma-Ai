@@ -1,0 +1,64 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-container {
+  max-width: 1150px;
+  margin: 10px auto;
+  height: calc(100vh - 20px);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-box {
+  height: 300px; /* Altura fixa para o chat */
+  overflow-y: auto; /* Adiciona rolagem */
+  display: flex;
+  flex-direction: column; /* Alinha os itens em coluna */
+}
+
+.chat-box ul {
+  list-style-type: none; /* Remove os marcadores de lista */
+  padding: 0; /* Remove o preenchimento */
+  margin: 0; /* Remove a margem */
+}
+
+.chat-box li {
+  margin: 5px 0; /* Margem entre as mensagens */
+  display: flex; /* Alinha as mensagens horizontalmente */
+  text-align: end;
+}
+
+.sent {
+  margin-left: auto; /* Alinha mensagens enviadas à direita */
+  background-color: #dcf8c6; /* Cor de fundo para mensagens enviadas */
+  padding: 10px; /* Preenchimento das mensagens */
+  border-radius: 10px; /* Bordas arredondadas */
+  max-width: 70%; /* Largura máxima das mensagens enviadas */
+  display: block;
+  margin-left: 220px;
+}
+
+.received {
+  margin-right: auto; /* Alinha mensagens recebidas à esquerda */
+  background-color: #f1f0f0; /* Cor de fundo para mensagens recebidas */
+  padding: 10px; /* Preenchimento das mensagens */
+  border-radius: 10px; /* Bordas arredondadas */
+  max-width: 70%; /* Largura máxima das mensagens recebidas */
+}
+
+.input-group {
+  margin-top: 10px;
+}
+
+#personName {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#myName {
+  font-weight: bold;
+  font-size: 16px;
+}

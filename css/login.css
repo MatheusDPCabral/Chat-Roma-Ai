@@ -1,0 +1,49 @@
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  height: 100vh;
+}
+
+.login-box {
+  background-color: #fff;
+  padding: 30px; /* Mantenha o padding conforme necessário */
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px; /* Ajuste o tamanho máximo conforme necessário */
+  height: 550px; /* Altura fixa */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ddd; 
+  display: flex; /* Adicione esta linha */
+  flex-direction: column; /* Para alinhar os itens verticalmente */
+  justify-content: center; /* Para centralizar os itens verticalmente */
+}
+
+
+h2 {
+  color: #333;
+}
+
+input.form-control {
+  height: 44px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.btn-primary {
+  background-color: #3897f0;
+  border-color: #3897f0;
+}
+
+a {
+  color: #00376b;
+  font-size: 14px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
