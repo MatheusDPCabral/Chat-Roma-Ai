@@ -5,11 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Chat</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-    <h2>Login</h2>
-    Usuário: <input type="text" id="username" />
-    <button onclick="login()">Entrar</button>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="login-box">
+            <h2 class="text-center mb-4">Login Chat</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" placeholder="Password" required>
+                </div>
+                <button type="button" class="btn btn-primary btn-block" onclick="login()">Log in</button>
+                <div class="text-center mt-3">
+                    <a href="#">Forgotten password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script>
         function login() {
@@ -20,9 +36,12 @@
                 alert("Por favor, insira um nome de usuário.");
             }
         }
-        document.querySelector("#username").addEventListener("keypress", function(event) {
+
+        // Adiciona evento de escuta para o pressionamento de Enter no formulário
+        document.getElementById("loginForm").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
-                login();
+                event.preventDefault(); // Impede o comportamento padrão do Enter
+                login(); // Chama a função de login
             }
         });
     </script>
