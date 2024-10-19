@@ -3,10 +3,25 @@ const http = require("http");
 const socketIo = require("socket.io");
 const fs = require("fs");
 const path = require("path");
+const cors = require("cors"); // Adicionando o CORS
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+
+// Configurando o CORS
+app.use(cors({
+    origin: '*', // Permitindo todas as origens para teste
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
+
+// Configuração do Socket.IO com CORS
+const io = socketIo(server, {
+    cors: {
+        origin: '*', // Permitindo todas as origens para teste
+        methods: ["GET", "POST"]
+    }
+});
 
 // Middleware para servir arquivos estáticos
 app.use(express.static(path.join(__dirname, '..'))); // Corrigido para usar path.join
@@ -34,6 +49,7 @@ app.get("/chat", (req, res) => {
     res.end(chat);
 });
 
+// Servidor rodando na porta 4001
 server.listen(4001, () => {
     console.log("Servidor Socket.IO rodando na porta 4001");
 });
