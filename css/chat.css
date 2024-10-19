@@ -1,3 +1,4 @@
+/* Body and html styles */
 body, html {
   height: 100%;
   margin: 0;
@@ -13,40 +14,53 @@ body, html {
 }
 
 .chat-box {
-  height: 300px; /* Altura fixa para o chat */
-  overflow-y: auto; /* Adiciona rolagem */
+  height: 300px;
+  overflow-y: auto;
   display: flex;
-  flex-direction: column; /* Alinha os itens em coluna */
+  flex-direction: column;
 }
 
 .chat-box ul {
-  list-style-type: none; /* Remove os marcadores de lista */
-  padding: 0; /* Remove o preenchimento */
-  margin: 0; /* Remove a margem */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .chat-box li {
-  margin: 5px 0; /* Margem entre as mensagens */
-  display: flex; /* Alinha as mensagens horizontalmente */
-  text-align: end;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  max-width: 50%;
 }
 
 .sent {
-  margin-left: auto; /* Alinha mensagens enviadas à direita */
-  background-color: #dcf8c6; /* Cor de fundo para mensagens enviadas */
-  padding: 10px; /* Preenchimento das mensagens */
-  border-radius: 10px; /* Bordas arredondadas */
-  max-width: 70%; /* Largura máxima das mensagens enviadas */
-  display: block;
-  margin-left: 220px;
+  margin-left: auto;
+  background-color: #dcf8c6;
+  padding: 5px 10px;
+  border-radius: 10px;
+  width: fit-content;
 }
 
 .received {
-  margin-right: auto; /* Alinha mensagens recebidas à esquerda */
-  background-color: #f1f0f0; /* Cor de fundo para mensagens recebidas */
-  padding: 10px; /* Preenchimento das mensagens */
-  border-radius: 10px; /* Bordas arredondadas */
-  max-width: 70%; /* Largura máxima das mensagens recebidas */
+  margin-right: auto;
+  background-color: #f1f0f0;
+  padding: 5px 10px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.username {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.sent .username {
+  display: none;
+}
+
+.message-content {
+  white-space: pre-wrap;
 }
 
 .input-group {
@@ -58,11 +72,101 @@ body, html {
   font-size: 16px;
 }
 
-#myName {
-  font-weight: bold;
-  font-size: 16px;
+.list-unstyled {
+  display: flex;
+  flex-flow: column wrap;
 }
 
 .list-unstyled .sent {
-  margin-left: 180px;
+  align-self: end;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.dark-mode .card {
+  background-color: #2c2c2c;
+  color: white;
+}
+
+.dark-mode .received {
+  background-color: #3a3a3a;
+}
+
+.dark-mode .sent {
+  background-color: #7b4bda;
+  color: white;
+}
+
+/* Estilos para a barra de input no modo noturno */
+.dark-mode .input-group .form-control {
+  background-color: #2c2c2c;
+  color: white;
+  border: 1px solid #565656;
+}
+
+.dark-mode .input-group .form-control::placeholder {
+  color: #a1a1a1;
+}
+
+.dark-mode .input-group .btn-success {
+  background-color: #565656;
+  border-color: #565656;
+  color: white;
+}
+
+.dark-mode .input-group .btn-success:hover {
+  background-color: #7b4bda;
+  border-color: #7b4bda;
+  color: white;
+}
+
+/* Switch button styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
 }

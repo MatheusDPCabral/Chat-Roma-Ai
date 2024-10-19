@@ -11,7 +11,16 @@
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="login-box">
-            <h2 class="text-center mb-4">Login Chat</h2>
+            <!-- Header com o botão de alternância para o modo noturno -->
+            <div class="d-flex justify-content-center align-items-center mb-4 position-relative">
+                <h2 class="text-center">Login Chat</h2>
+                <!-- Botão de alternância para o modo noturno -->
+                <label class="switch position-absolute" style="right: 0;">
+                    <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            
             <form id="loginForm">
                 <div class="form-group">
                     <input type="text" class="form-control" id="username" placeholder="Username" required>
@@ -40,10 +49,15 @@
         // Adiciona evento de escuta para o pressionamento de Enter no formulário
         document.getElementById("loginForm").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
-                event.preventDefault(); // Impede o comportamento padrão do Enter
-                login(); // Chama a função de login
+                event.preventDefault();
+                login();
             }
         });
+
+        // Função para alternar o modo noturno
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
     </script>
 </body>
 </html>
