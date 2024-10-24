@@ -23,12 +23,28 @@ const io = socketIo(server, {
 
 app.use(express.static(path.join(__dirname, '..')));
 
+let users = [];
+
 io.on("connection", (socket) => {
     console.log("Usuário conectado " + socket.id);
+
+    // Listen for new users
+    socket.on("newUser", (username) => {
+        socket.username = username; // Store username in socket
+        users.push(username);
+        io.emit("userList", users);
+    });
 
     socket.on("message", (msg) => {
         console.log(`Mensagem de ${msg.username}: ${msg.message}`);
         io.emit("message", msg);
+    });
+
+    // When a user disconnects
+    socket.on("disconnect", () => {
+        console.log("Usuário desconectado " + socket.id);
+        users = users.filter(user => user !== socket.username); // Remove user from list
+        io.emit("userList", users); // Emit updated list
     });
 });
 

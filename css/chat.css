@@ -105,32 +105,34 @@ body.dark-mode {
 .dark-mode .input-group .form-control {
   background-color: #2c2c2c;
   color: white;
-  border: 1px solid #565656;
 }
 
-.dark-mode .input-group .form-control::placeholder {
-  color: #a1a1a1;
-}
-
-.dark-mode .input-group .btn-success {
-  background-color: #565656;
-  border-color: #565656;
-  color: white;
-}
-
-.dark-mode .input-group .btn-success:hover {
+.dark-mode .input-group .btn {
   background-color: #7b4bda;
-  border-color: #7b4bda;
   color: white;
 }
 
-/* Switch button styles */
+/* Estilo para o dropdown no modo noturno */
+.dark-mode .dropdown-menu {
+  background-color: #2c2c2c; /* Fundo escuro */
+  color: white; /* Texto branco */
+  border: 1px solid #7b4bda; /* Borda roxa para maior visibilidade */
+}
+
+.dark-mode .dropdown-item {
+  background-color: #2c2c2c;
+  color: white;
+}
+
+.dark-mode .dropdown-item:hover {
+  background-color: #444; /* Destaque ao passar o mouse */
+}
+
 .switch {
   position: relative;
   display: inline-block;
-  width: 40px;
+  width: 34px;
   height: 20px;
-  margin-right: 10px;
 }
 
 .switch input {
@@ -148,25 +150,39 @@ body.dark-mode {
   bottom: 0;
   background-color: #ccc;
   transition: .4s;
-  border-radius: 20px;
+  border-radius: 34px;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 14px;
-  width: 14px;
+  height: 12px;
+  width: 12px;
   border-radius: 50%;
-  left: 3px;
-  bottom: 3px;
+  left: 4px;
+  bottom: 4px;
   background-color: white;
   transition: .4s;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #7b4bda;
 }
 
 input:checked + .slider:before {
-  transform: translateX(20px);
+  transform: translateX(14px);
+}
+
+.dark-mode .slider {
+  background-color: #444;
+}
+
+body.dark-mode .dropdown .btn {
+    background-color: #333;
+    color: #fff;
+}
+
+body:not(.dark-mode) .dropdown .btn {
+    background-color: #f8f9fa;
+    color: #000;
 }
