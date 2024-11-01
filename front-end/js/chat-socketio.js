@@ -16,8 +16,31 @@ module.exports = (io) => {
         socket.on("message", async (msg) => {
             console.log(`Mensagem de ${msg.username}: ${msg.message}`);
 
+            if (msg.message.startsWith("/dog")) {
+                try {
+                    const response = await axios.get('https://dog.ceo/api/breeds/image/random');
+                    const dogImageUrl = response.data.message; // URL da imagem de cachorro
+
+                    // Envia a mensagem do usuário para o chat
+                    io.emit("message", {
+                        username: msg.username, // O nome do usuário que enviou a mensagem
+                        message: msg.message     // A mensagem original
+                    });
+
+                    io.emit("message", {
+                        username: "Dog CEO API",
+                        message: dogImageUrl
+                    });
+                } catch (error) {
+                    console.error("Erro ao se comunicar com a Dog CEO API:", error);
+                    io.emit("message", {
+                        username: "Erro",
+                        message: "Desculpe, não consegui obter uma imagem de cachorro."
+                    });
+                }
+            }
             // Verifica se a mensagem começa com /image
-            if (msg.message.startsWith("/image ")) {
+            else if (msg.message.startsWith("/image ")) {
                 const imageDescription = msg.message.replace("/image ", "");
 
                 // Envia a mensagem do usuário para o chat
