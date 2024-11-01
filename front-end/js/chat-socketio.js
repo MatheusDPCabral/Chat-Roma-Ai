@@ -39,6 +39,28 @@ module.exports = (io) => {
                     });
                 }
             }
+            else if (msg.message.startsWith("/fox")) {
+                try {
+                    const response = await axios.get("https://randomfox.ca/floof/");
+                    const foxImageUrl = response.data.image; // URL da imagem de raposa
+
+                    io.emit("message", {
+                        username: msg.username,
+                        message: msg.message
+                    });
+
+                    io.emit("message", {
+                        username: "FoxBot",
+                        message: foxImageUrl
+                    });
+                } catch (error) {
+                    console.error("Erro ao se comunicar com a API de raposas:", error);
+                    io.emit("message", {
+                        username: "Erro",
+                        message: "Desculpe, não consegui obter uma imagem de raposa."
+                    });
+                }
+            }
             // Verifica se a mensagem começa com /image
             else if (msg.message.startsWith("/image ")) {
                 const imageDescription = msg.message.replace("/image ", "");
