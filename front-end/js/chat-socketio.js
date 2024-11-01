@@ -38,8 +38,7 @@ module.exports = (io) => {
                         message: "Desculpe, não consegui obter uma imagem de cachorro."
                     });
                 }
-            }
-            else if (msg.message.startsWith("/fox")) {
+            } else if (msg.message.startsWith("/fox")) {
                 try {
                     const response = await axios.get("https://randomfox.ca/floof/");
                     const foxImageUrl = response.data.image; // URL da imagem de raposa
@@ -58,6 +57,28 @@ module.exports = (io) => {
                     io.emit("message", {
                         username: "Erro",
                         message: "Desculpe, não consegui obter uma imagem de raposa."
+                    });
+                }
+            } else if (msg.message.startsWith("/cat")) {
+                try {
+                    const response = await axios.get('https://api.thecatapi.com/v1/images/search'); // Requisição à Cat API
+                    const catImageUrl = response.data[0].url; // URL da imagem de gato
+        
+                    // Envia a mensagem do usuário para o chat
+                    io.emit("message", {
+                        username: msg.username,
+                        message: msg.message
+                    });
+        
+                    io.emit("message", {
+                        username: "The Cat API",
+                        message: catImageUrl
+                    });
+                } catch (error) {
+                    console.error("Erro ao se comunicar com a The Cat API:", error);
+                    io.emit("message", {
+                        username: "Erro",
+                        message: "Desculpe, não consegui obter uma imagem de gato."
                     });
                 }
             }
