@@ -1,5 +1,7 @@
 modules = ["nodejs-20"]
 
+run = "node back-end/server.js"
+
 [[ports]]
 localPort = 4001
 externalPort = 80

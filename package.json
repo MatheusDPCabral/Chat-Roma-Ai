@@ -4,16 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-wbs": "node ./websocket/chat-websocket.js",
-    "start-sktio": "node ./socketio/chat-socketio.js"
+    "start": "node ./back-end/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^18.0.6",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "socket.io": "^4.8.0",
+    "openai": "^4.69.0",
+    "socket.io": "^4.8.1",
     "ws": "^8.18.0"
   }
 }
