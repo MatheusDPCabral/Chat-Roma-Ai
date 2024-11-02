@@ -146,6 +146,32 @@ module.exports = (io) => {
                         message: "Desculpe, não consegui gerar uma resposta."
                     });
                 }
+            } else if (msg.message.startsWith("/pokemon")) {
+                try {
+                    // Gera um número aleatório para o ID do Pokémon
+                    const randomId = Math.floor(Math.random() * 1010) + 1;
+                    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
+                    const pokemon = response.data;
+                    const pokemonImageUrl = pokemon.sprites.front_default; // URL da imagem do Pokémon
+
+                    if (pokemonImageUrl) {
+                        io.emit("message", {
+                            username: "PokeAPI",
+                            message: pokemonImageUrl // Envia apenas a URL da imagem
+                        });
+                    } else {
+                        io.emit("message", {
+                            username: "Erro",
+                            message: "Desculpe, não encontrei uma imagem para esse Pokémon."
+                        });
+                    }
+                } catch (error) {
+                    console.error("Erro ao se comunicar com a PokeAPI:", error);
+                    io.emit("message", {
+                        username: "Erro",
+                        message: "Desculpe, não consegui obter uma imagem de Pokémon."
+                    });
+                }
             } else {
                 // Apenas retransmite a mensagem
                 io.emit("message", msg); // Inclui a mensagem original do usuário
