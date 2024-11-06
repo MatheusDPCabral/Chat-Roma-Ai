@@ -9,7 +9,7 @@
 - [David Alexandre](https://www.linkedin.com/in/david-alexandre-lima/)
 - [Jose Luís](https://www.linkedin.com/in/josé-luiz-henrique/)
 - [Matheus Cabral](https://www.linkedin.com/in/matheus-cabral-440934268)
-- [Matheus Santana](https://www.linkedin.com/in/mateus-santana-113797233)
+- [Mateus Santana](https://www.linkedin.com/in/mateus-santana-113797233)
 
 ---
 
