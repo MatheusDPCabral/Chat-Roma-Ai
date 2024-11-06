@@ -16,8 +16,8 @@ module.exports = (io) => {
         socket.on("message", async (msg) => {
             console.log(`Mensagem de ${msg.username}: ${msg.message}`);
 
-            // Verifica se a mensagem começa com /gato
-            if (msg.message.startsWith("/gato")) {
+            // Verifica se a mensagem começa com /cat
+            if (msg.message.startsWith("/cat")) {
                 // Envia a mensagem do usuário para o chat
                 io.emit("message", {
                     username: msg.username,
@@ -109,46 +109,6 @@ module.exports = (io) => {
                     });
                 }
             }
-            // Verifica se a mensagem começa com /pokemon
-            else if (msg.message.startsWith("/pokemon")) {
-                // Envia a mensagem do usuário para o chat
-                io.emit("message", {
-                    username: msg.username,
-                    message: msg.message,
-                });
-
-                try {
-                    // Primeiro, obtém o total de Pokémon
-                    const totalResponse = await axios.get(
-                        "https://pokeapi.co/api/v2/pokemon?limit=1",
-                    );
-                    const totalPokemon = totalResponse.data.count; // Número total de Pokémon
-
-                    // Seleciona um Pokémon aleatório
-                    const randomId =
-                        Math.floor(Math.random() * totalPokemon) + 1; // ID aleatório
-
-                    // Requisição à PokéAPI para obter o Pokémon aleatório
-                    const pokemonResponse = await axios.get(
-                        `https://pokeapi.co/api/v2/pokemon/${randomId}`,
-                    );
-                    const pokemonImageUrl =
-                        pokemonResponse.data.sprites.front_default; // Obtém a URL da imagem
-
-                    // Envia a imagem para o chat
-                    io.emit("message", {
-                        username: "PokéAPI",
-                        message: pokemonImageUrl,
-                    });
-                } catch (error) {
-                    console.error("Erro ao buscar imagem do Pokémon:", error);
-                    io.emit("message", {
-                        username: "Erro",
-                        message:
-                            "Desculpe, não consegui trazer uma imagem do Pokémon.",
-                    });
-                }
-            }
             // Lógica existente para /image e /text
             else if (msg.message.startsWith("/image ")) {
                 const imageDescription = msg.message.replace("/image ", "");
@@ -218,6 +178,39 @@ module.exports = (io) => {
                     io.emit("message", {
                         username: "Erro",
                         message: "Desculpe, não consegui gerar uma resposta.",
+                    });
+                }
+            } else if (msg.message.startsWith("/pokemon")) {
+                try {
+
+                    // Envia a mensagem do usuário para o chat
+                    io.emit("message", {
+                        username: msg.username,
+                        message: msg.message,
+                    });
+                    
+                    // Gera um número aleatório para o ID do Pokémon
+                    const randomId = Math.floor(Math.random() * 1010) + 1;
+                    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
+                    const pokemon = response.data;
+                    const pokemonImageUrl = pokemon.sprites.front_default; // URL da imagem do Pokémon
+
+                    if (pokemonImageUrl) {
+                        io.emit("message", {
+                            username: "PokeAPI",
+                            message: pokemonImageUrl // Envia apenas a URL da imagem
+                        });
+                    } else {
+                        io.emit("message", {
+                            username: "Erro",
+                            message: "Desculpe, não encontrei uma imagem para esse Pokémon."
+                        });
+                    }
+                } catch (error) {
+                    console.error("Erro ao se comunicar com a PokeAPI:", error);
+                    io.emit("message", {
+                        username: "Erro",
+                        message: "Desculpe, não consegui obter uma imagem de Pokémon."
                     });
                 }
             } else {
