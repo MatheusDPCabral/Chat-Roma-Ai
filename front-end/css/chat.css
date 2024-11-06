@@ -107,6 +107,10 @@ body.dark-mode {
   color: white;
 }
 
+.input-group::placeholder {
+    color: white; /* Altere essa cor para o que desejar */
+}
+
 .dark-mode .input-group .btn {
   background-color: #7b4bda;
   color: white;

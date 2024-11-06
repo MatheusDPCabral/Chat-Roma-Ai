@@ -4,14 +4,13 @@ const { Server } = require('socket.io');
 const path = require('path');
 const axios = require('axios');
 require('dotenv').config();
-console.log("Variáveis de ambiente:", process.env);
-console.log("Chave da API:", process.env.OPENAI_API_KEY); // Verifique se a chave está sendo exibida corretamente
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
 // Middleware para servir arquivos estáticos
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../front-end')));
 app.use(express.json()); // Middleware para processar JSON
 
@@ -77,7 +76,6 @@ app.post('/openai/image', async (req, res) => {
         res.status(500).json({ error: "Erro ao gerar imagem." });
     }
 });
-
 
 // Passa o objeto io para chat-socketio.js
 require('../front-end/js/chat-socketio')(io);
