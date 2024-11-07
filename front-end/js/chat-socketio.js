@@ -24,6 +24,12 @@ module.exports = (io) => {
                     message: msg.message,
                 });
 
+                // Envia uma mensagem de "loading" antes da requisição
+                io.emit("message", {
+                    username: "Sistema",
+                    message: "Carregando... aguarde um momento enquanto buscamos a imagem de gato.",
+                });
+
                 try {
                     // Requisição à API de gatos
                     const response = await axios.get(
@@ -51,6 +57,12 @@ module.exports = (io) => {
                 io.emit("message", {
                     username: msg.username,
                     message: msg.message,
+                });
+
+                // Envia uma mensagem de "loading" antes da requisição
+                io.emit("message", {
+                    username: "Sistema",
+                    message: "Carregando... aguarde um momento enquanto buscamos a imagem de cachorro.",
                 });
 
                 try {
@@ -85,6 +97,12 @@ module.exports = (io) => {
                     message: msg.message,
                 });
 
+                // Envia uma mensagem de "loading" antes da requisição
+                io.emit("message", {
+                    username: "Sistema",
+                    message: "Carregando... aguarde um momento enquanto buscamos a imagem de raposa.",
+                });
+
                 try {
                     // Faz uma solicitação para a API de raposas
                     const response = await axios.get(
@@ -115,6 +133,12 @@ module.exports = (io) => {
                 io.emit("message", {
                     username: msg.username,
                     message: msg.message,
+                });
+
+                // Envia uma mensagem de "loading" antes da requisição
+                io.emit("message", {
+                    username: "Sistema",
+                    message: "Carregando... aguarde um momento enquanto geramos a imagem.",
                 });
 
                 try {
@@ -153,6 +177,12 @@ module.exports = (io) => {
                     message: msg.message,
                 });
 
+                // Envia uma mensagem de "loading" antes da requisição
+                io.emit("message", {
+                    username: "Sistema",
+                    message: "Carregando... aguarde um momento enquanto geramos uma resposta.",
+                });
+
                 try {
                     const response = await axios.post(
                         "https://api.openai.com/v1/chat/completions",
@@ -182,13 +212,18 @@ module.exports = (io) => {
                 }
             } else if (msg.message.startsWith("/pokemon")) {
                 try {
-
                     // Envia a mensagem do usuário para o chat
                     io.emit("message", {
                         username: msg.username,
                         message: msg.message,
                     });
-                    
+
+                    // Envia uma mensagem de "loading" antes da requisição
+                    io.emit("message", {
+                        username: "Sistema",
+                        message: "Carregando... aguarde um momento enquanto buscamos um Pokémon.",
+                    });
+
                     // Gera um número aleatório para o ID do Pokémon
                     const randomId = Math.floor(Math.random() * 1010) + 1;
                     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
