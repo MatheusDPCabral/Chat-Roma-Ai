@@ -1,137 +1,158 @@
-/* Body and html styles */
+/* Estilos gerais para body e html */
 body, html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+  height: 100%; /* Define a altura completa */
+  margin: 0; /* Remove a margem padrão */
+  padding: 0; /* Remove o padding padrão */
 }
 
+/* Container principal do chat */
 .chat-container {
-  max-width: 1150px;
-  margin: 10px auto;
-  height: calc(100vh - 20px);
+  max-width: 1150px; /* Largura máxima do container */
+  margin: 10px auto; /* Centraliza horizontalmente com uma margem vertical de 10px */
+  height: calc(100vh - 20px); /* Define a altura dinâmica para se ajustar à tela */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Organiza os elementos do container em coluna */
 }
 
+/* Caixa de mensagens do chat */
 .chat-box {
-  height: 300px;
-  overflow-y: auto;
+  height: 300px; /* Altura fixa para a área de mensagens */
+  overflow-y: auto; /* Adiciona rolagem vertical se necessário */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Organiza as mensagens em coluna */
 }
 
+/* Remove as estilizações padrão da lista não ordenada */
 .chat-box ul {
-  list-style-type: none;
+  list-style-type: none; /* Remove os marcadores de lista */
   padding: 0;
   margin: 0;
 }
 
+/* Estilo para cada mensagem na lista */
 .chat-box li {
-  margin: 5px 0;
+  margin: 5px 0; /* Espaçamento vertical entre mensagens */
   display: flex;
-  flex-direction: column;
-  word-wrap: break-word;
-  max-width: 50%;
+  flex-direction: column; /* Alinha o conteúdo em coluna */
+  word-wrap: break-word; /* Quebra a palavra se não couber na linha */
+  max-width: 50%; /* Largura máxima de cada mensagem */
 }
 
+/* Estilização das mensagens enviadas */
 .sent {
-  margin-left: auto;
-  background-color: #dcf8c6;
-  padding: 5px 10px;
-  border-radius: 10px;
-  width: fit-content;
+  margin-left: auto; /* Alinha à direita */
+  background-color: #dcf8c6; /* Cor de fundo para mensagens enviadas */
+  padding: 5px 10px; /* Espaçamento interno */
+  border-radius: 10px; /* Arredonda os cantos */
+  width: fit-content; /* Ajusta a largura ao conteúdo */
 }
 
+/* Estilização das mensagens recebidas */
 .received {
-  margin-right: auto;
-  background-color: #f1f0f0;
-  padding: 5px 10px;
-  border-radius: 10px;
-  width: fit-content;
+  margin-right: auto; /* Alinha à esquerda */
+  background-color: #f1f0f0; /* Cor de fundo para mensagens recebidas */
+  padding: 5px 10px; /* Espaçamento interno */
+  border-radius: 10px; /* Arredonda os cantos */
+  width: fit-content; /* Ajusta a largura ao conteúdo */
 }
 
+/* Estilo para o nome de usuário */
 .username {
-  font-weight: bold;
-  margin-bottom: 2px;
+  font-weight: bold; /* Texto em negrito */
+  margin-bottom: 2px; /* Espaço abaixo do nome */
 }
 
+/* Esconde o nome de usuário nas mensagens enviadas */
 .sent .username {
   display: none;
 }
 
+/* Estilização do conteúdo da mensagem */
 .message-content {
-  white-space: pre-wrap;
+  white-space: pre-wrap; /* Mantém espaços em branco e quebras de linha */
 }
 
+/* Grupo de entrada de texto */
 .input-group {
-  margin-top: 10px;
+  margin-top: 10px; /* Espaço acima do grupo de entrada */
 }
 
+/* Estilo para o nome da pessoa */
 #personName {
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: bold; /* Negrito para destaque */
+  font-size: 16px; /* Tamanho do texto */
 }
 
+/* Estilização para listas sem estilo */
 .list-unstyled {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column wrap; /* Organiza os itens em coluna com possibilidade de quebra */
 }
 
+/* Alinha as mensagens enviadas no final */
 .list-unstyled .sent {
   align-self: end;
 }
 
-/* Dark mode styles */
+/* Modo noturno: altera o fundo e a cor do texto */
 body.dark-mode {
-  background-color: #121212;
-  color: white;
+  background-color: #121212; /* Fundo escuro */
+  color: white; /* Texto branco */
 }
 
+/* Estiliza elementos específicos no modo noturno */
 .dark-mode .card {
   background-color: #2c2c2c;
   color: white;
 }
 
+/* Estiliza as mensagens recebidas no modo noturno */
 .dark-mode .received {
   background-color: #3a3a3a;
 }
 
+/* Estiliza as mensagens enviadas no modo noturno */
 .dark-mode .sent {
   background-color: #7b4bda;
   color: white;
 }
 
-/* Estilos para a barra de input no modo noturno */
+/* Estiliza o campo de entrada no modo noturno */
 .dark-mode .input-group .form-control {
   background-color: #2c2c2c;
   color: white;
 }
 
+/* Estiliza o placeholder do campo de entrada */
 .input-group::placeholder {
-    color: white; /* Altere essa cor para o que desejar */
+  color: white; /* Cor personalizada para o placeholder */
 }
 
+/* Estiliza o botão de entrada no modo noturno */
 .dark-mode .input-group .btn {
   background-color: #7b4bda;
   color: white;
 }
 
-/* Estilo para o dropdown no modo noturno */
+/* Estilização do dropdown no modo noturno */
 .dark-mode .dropdown-menu {
   background-color: #2c2c2c; /* Fundo escuro */
   color: white; /* Texto branco */
-  border: 1px solid #7b4bda; /* Borda roxa para maior visibilidade */
+  border: 1px solid #7b4bda; /* Borda visível e roxa */
 }
 
+/* Estilo para itens do dropdown no modo noturno */
 .dark-mode .dropdown-item {
   background-color: #2c2c2c;
   color: white;
 }
 
+/* Destaque ao passar o mouse sobre os itens do dropdown */
 .dark-mode .dropdown-item:hover {
-  background-color: #444; /* Destaque ao passar o mouse */
+  background-color: #444;
 }
 
+/* Estilização para o switch do modo noturno */
 .switch {
   position: relative;
   display: inline-block;
@@ -140,11 +161,12 @@ body.dark-mode {
 }
 
 .switch input {
-  opacity: 0;
+  opacity: 0; /* Torna o input invisível */
   width: 0;
   height: 0;
 }
 
+/* Estilização do slider do switch */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -152,11 +174,12 @@ body.dark-mode {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-  border-radius: 34px;
+  background-color: #ccc; /* Cor padrão do slider */
+  transition: .4s; /* Transição suave */
+  border-radius: 34px; /* Arredonda o slider */
 }
 
+/* Estilização do círculo dentro do slider */
 .slider:before {
   position: absolute;
   content: "";
@@ -169,24 +192,54 @@ body.dark-mode {
   transition: .4s;
 }
 
+/* Estilo do slider quando o input está marcado */
 input:checked + .slider {
   background-color: #7b4bda;
 }
 
 input:checked + .slider:before {
-  transform: translateX(14px);
+  transform: translateX(14px); /* Move o círculo para a direita */
 }
 
+/* Estiliza o slider no modo noturno */
 .dark-mode .slider {
   background-color: #444;
 }
 
+/* Estilo do botão do dropdown no modo noturno */
 body.dark-mode .dropdown .btn {
-    background-color: #333;
-    color: #fff;
+  background-color: #333;
+  color: #fff;
 }
 
+/* Estilo do botão do dropdown fora do modo noturno */
 body:not(.dark-mode) .dropdown .btn {
-    background-color: #f8f9fa;
-    color: #000;
+  background-color: #f8f9fa;
+  color: #000;
+}
+
+/* Responsividade: Ajustes para telas menores */
+@media (max-width: 768px) {
+  .chat-container {
+    max-width: 100%; /* Largura total em dispositivos menores */
+    padding: 0 10px; /* Padding lateral */
+  }
+  
+  .chat-box li {
+    max-width: 70%; /* Ajusta a largura das mensagens */
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-box {
+    height: 200px; /* Reduz a altura da caixa de chat */
+  }
+
+  .chat-box li {
+    max-width: 100%; /* Usa a largura total para mensagens */
+  }
+
+  #personName {
+    font-size: 14px; /* Diminui o tamanho do texto */
+  }
 }
