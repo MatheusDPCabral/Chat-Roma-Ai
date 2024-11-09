@@ -190,3 +190,29 @@ body:not(.dark-mode) .dropdown .btn {
     background-color: #f8f9fa;
     color: #000;
 }
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .chat-container {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  
+  .chat-box li {
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-box {
+    height: 200px;
+  }
+
+  .chat-box li {
+    max-width: 100%;
+  }
+
+  #personName {
+    font-size: 14px;
+  }
+}
