@@ -97,30 +97,30 @@ body.dark-mode {
 }
 
 .dark-mode .sent {
-  background-color: #7b4bda;
+  background-color: #3a3a3a;
   color: white;
 }
 
-/* Estilos para a barra de input no modo noturno */
+
 .dark-mode .input-group .form-control {
   background-color: #2c2c2c;
   color: white;
 }
 
 .input-group::placeholder {
-    color: white; /* Altere essa cor para o que desejar */
+    color: white; 
 }
 
 .dark-mode .input-group .btn {
-  background-color: #7b4bda;
+  background-color: #4CAF50;
   color: white;
 }
 
-/* Estilo para o dropdown no modo noturno */
+
 .dark-mode .dropdown-menu {
-  background-color: #2c2c2c; /* Fundo escuro */
-  color: white; /* Texto branco */
-  border: 1px solid #7b4bda; /* Borda roxa para maior visibilidade */
+  background-color: #2c2c2c; 
+  color: white; 
+  border: 1px solid #4CAF50;
 }
 
 .dark-mode .dropdown-item {
@@ -129,7 +129,7 @@ body.dark-mode {
 }
 
 .dark-mode .dropdown-item:hover {
-  background-color: #444; /* Destaque ao passar o mouse */
+  background-color: #444; 
 }
 
 .switch {
@@ -170,7 +170,7 @@ body.dark-mode {
 }
 
 input:checked + .slider {
-  background-color: #7b4bda;
+  background-color: #4CAF50;
 }
 
 input:checked + .slider:before {
@@ -189,4 +189,106 @@ body.dark-mode .dropdown .btn {
 body:not(.dark-mode) .dropdown .btn {
     background-color: #f8f9fa;
     color: #000;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .chat-container {
+    max-width: 90%;
+  }
+
+  .chat-box {
+    height: 250px; 
+  }
+
+  .chat-box li {
+    max-width: 70%; 
+  }
+
+  #personName {
+    font-size: 14px;
+  }
+
+  .input-group {
+    flex-direction: column; 
+  }
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    max-width: 100%;
+    margin: 0;
+    height: 100%; 
+  }
+
+  .chat-box {
+    height: 200px;
+    padding: 0 10px; 
+  }
+
+  .chat-box li {
+    max-width: 90%; 
+  }
+
+  .input-group {
+    flex-direction: column;
+    gap: 10px; 
+  }
+
+  #personName {
+    font-size: 12px; 
+  }
+
+  .switch {
+    width: 28px;
+    height: 16px;
+  }
+
+  .slider:before {
+    height: 10px;
+    width: 10px;
+  }
+}
+.input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+}
+
+.input-group .form-control {
+  flex: 1; 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-group .btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.input-group .btn:hover {
+  background-color: #4CAF50;
+}
+
+
+@media (max-width: 768px) {
+  .input-group {
+    flex-direction: column;
+    gap: 5px; 
+  }
+
+  .input-group .form-control {
+    width: 100%; 
+  }
+
+  .input-group .btn {
+    width: 100%; 
+    padding: 10px;
+  }
 }
