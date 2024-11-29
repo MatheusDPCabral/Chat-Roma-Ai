@@ -101,6 +101,15 @@ body.dark-mode {
   color: white;
 }
 
+.input-group .form-control::placeholder {
+  color: gray; /* Cor padrão */
+}
+
+/* Estilo do placeholder no modo dark mode */
+body.dark-mode .input-group .form-control::placeholder {
+  color: white; /* Cor para o dark mode */
+}
+
 
 .dark-mode .input-group .form-control {
   background-color: #2c2c2c;
