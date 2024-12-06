@@ -109,6 +109,38 @@ module.exports = (io) => {
                     });
                 }
             }
+             // Verifica se a mensagem começa com /car
+             else if (msg.message.startsWith("/car")) {
+                // Envia a mensagem do usuário para o chat
+                io.emit("message", {
+                    username: msg.username,
+                    message: msg.message,
+                });
+
+                try {
+                    // Faz uma solicitação para a API de carros
+                    const response = await axios.get(
+                        "https://www.pexels.com/search/cars/",
+                    );
+                    const carImageUrl = response.data.message; // Obtém a URL da imagem de carro
+
+                    // Envia a imagem de carro para o chat
+                    io.emit("message", {
+                        username: "Car API", // Nome para a resposta da API
+                        message: carImageUrl, // A URL da imagem gerada
+                    });
+                } catch (error) {
+                    console.error(
+                        "Erro ao se comunicar com a API de carros:",
+                        error,
+                    );
+                    io.emit("message", {
+                        username: "Erro",
+                        message:
+                            "Desculpe, não consegui trazer uma imagem de carro.",
+                    });
+                }
+            }
             // Lógica existente para /image e /text
             else if (msg.message.startsWith("/image ")) {
                 const imageDescription = msg.message.replace("/image ", "");
