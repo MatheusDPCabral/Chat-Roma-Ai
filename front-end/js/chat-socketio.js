@@ -16,100 +16,101 @@ module.exports = (io) => {
         socket.on("message", async (msg) => {
             console.log(`Mensagem de ${msg.username}: ${msg.message}`);
 
-            // Verifica se a mensagem começa com /cat
-            if (msg.message.startsWith("/cat")) {
-                // Envia a mensagem do usuário para o chat
+            // Comando /help
+            if (msg.message.startsWith("/help")) {
+                io.emit("message", {
+                    username: msg.username,
+                    message: msg.message,
+                });
+
+                const helpMessage = `**Comandos disponíveis:**\n/fox\n/dog\n/cat\n/pokemon\n/image\n/text\n/miau\n/risada\n/mario\n/aplausos\n/neymar`;
+                io.emit("message", {
+                    username: "Comandos",
+                    message: helpMessage,
+                });
+            }
+            // Comando /cat
+            else if (msg.message.startsWith("/cat")) {
                 io.emit("message", {
                     username: msg.username,
                     message: msg.message,
                 });
 
                 try {
-                    // Requisição à API de gatos
-                    const response = await axios.get(
-                        "https://api.thecatapi.com/v1/images/search",
-                    );
-                    const catImageUrl = response.data[0].url; // Obtém a URL da imagem do gato
+                    const response = await axios.get("https://api.thecatapi.com/v1/images/search");
+                    const catImageUrl = response.data[0].url;
 
-                    // Envia a resposta da API (imagem) para o chat
                     io.emit("message", {
-                        username: "Gato API",
-                        message: catImageUrl, // A URL da imagem do gato
+                        username: "Cat API",
+                        message: catImageUrl,
                     });
+
+                    // Emite o comando para o cliente tocar o som de gato
+                    io.emit("playSound", "/sounds/gato-miando2.mp3");
+
                 } catch (error) {
                     console.error("Erro ao buscar imagem de gato:", error);
                     io.emit("message", {
                         username: "Erro",
-                        message:
-                            "Desculpe, não consegui trazer uma imagem de gato.",
+                        message: "Desculpe, não consegui trazer uma imagem de gato.",
                     });
                 }
             }
-            // Verifica se a mensagem começa com /dog
+            // Comando /dog
             else if (msg.message.startsWith("/dog")) {
-                // Envia a mensagem do usuário para o chat
                 io.emit("message", {
                     username: msg.username,
                     message: msg.message,
                 });
 
                 try {
-                    // Faz uma solicitação para a API de cães
-                    const response = await axios.get(
-                        "https://dog.ceo/api/breeds/image/random",
-                    );
-                    const dogImageUrl = response.data.message; // Obtém a URL da imagem de cachorro
+                    const response = await axios.get("https://dog.ceo/api/breeds/image/random");
+                    const dogImageUrl = response.data.message;
 
-                    // Envia a imagem de cachorro para o chat
                     io.emit("message", {
-                        username: "Dog API", // Nome para a resposta da API
-                        message: dogImageUrl, // A URL da imagem gerada
+                        username: "Dog API",
+                        message: dogImageUrl,
                     });
+
+                    // Emite o comando para o cliente tocar o som de cachorro
+                    io.emit("playSound", "/sounds/cachorro-latindo.mp3");
+
                 } catch (error) {
-                    console.error(
-                        "Erro ao se comunicar com a API de cães:",
-                        error,
-                    );
+                    console.error("Erro ao se comunicar com a API de cães:", error);
                     io.emit("message", {
                         username: "Erro",
-                        message:
-                            "Desculpe, não consegui trazer uma imagem de cachorro.",
+                        message: "Desculpe, não consegui trazer uma imagem de cachorro.",
                     });
                 }
             }
-            // Verifica se a mensagem começa com /fox
+            // Comando /fox
             else if (msg.message.startsWith("/fox")) {
-                // Envia a mensagem do usuário para o chat
                 io.emit("message", {
                     username: msg.username,
                     message: msg.message,
                 });
 
                 try {
-                    // Faz uma solicitação para a API de raposas
-                    const response = await axios.get(
-                        "https://randomfox.ca/floof/",
-                    );
-                    const foxImageUrl = response.data.image; // Obtém a URL da imagem de raposa
+                    const response = await axios.get("https://randomfox.ca/floof/");
+                    const foxImageUrl = response.data.image;
 
-                    // Envia a imagem de raposa para o chat
                     io.emit("message", {
-                        username: "Fox API", // Nome para a resposta da API
-                        message: foxImageUrl, // A URL da imagem gerada
+                        username: "Fox API",
+                        message: foxImageUrl,
                     });
+
+                    // Emite o comando para o cliente tocar o som de raposa
+                    io.emit("playSound", "/sounds/raposa.mp3");
+
                 } catch (error) {
-                    console.error(
-                        "Erro ao se comunicar com a API de raposas:",
-                        error,
-                    );
+                    console.error("Erro ao se comunicar com a API de raposas:", error);
                     io.emit("message", {
                         username: "Erro",
-                        message:
-                            "Desculpe, não consegui trazer uma imagem de raposa.",
+                        message: "Desculpe, não consegui trazer uma imagem de raposa.",
                     });
                 }
             }
-            // Lógica existente para /image e /text
+            // Comandos para /image e /text
             else if (msg.message.startsWith("/image ")) {
                 const imageDescription = msg.message.replace("/image ", "");
                 io.emit("message", {
@@ -129,7 +130,7 @@ module.exports = (io) => {
                             headers: {
                                 Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
                             },
-                        },
+                        }
                     );
 
                     const imageUrl = response.data.data[0].url;
@@ -164,7 +165,7 @@ module.exports = (io) => {
                             headers: {
                                 Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
                             },
-                        },
+                        }
                     );
 
                     const aiMessage = response.data.choices[0].message.content;
@@ -182,35 +183,32 @@ module.exports = (io) => {
                 }
             } else if (msg.message.startsWith("/pokemon")) {
                 try {
-
-                    // Envia a mensagem do usuário para o chat
                     io.emit("message", {
                         username: msg.username,
                         message: msg.message,
                     });
-                    
-                    // Gera um número aleatório para o ID do Pokémon
+
                     const randomId = Math.floor(Math.random() * 1010) + 1;
                     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
                     const pokemon = response.data;
-                    const pokemonImageUrl = pokemon.sprites.front_default; // URL da imagem do Pokémon
+                    const pokemonImageUrl = pokemon.sprites.front_default;
 
                     if (pokemonImageUrl) {
                         io.emit("message", {
                             username: "PokeAPI",
-                            message: pokemonImageUrl // Envia apenas a URL da imagem
+                            message: pokemonImageUrl,
                         });
                     } else {
                         io.emit("message", {
                             username: "Erro",
-                            message: "Desculpe, não encontrei uma imagem para esse Pokémon."
+                            message: "Desculpe, não encontrei uma imagem para esse Pokémon.",
                         });
                     }
                 } catch (error) {
                     console.error("Erro ao se comunicar com a PokeAPI:", error);
                     io.emit("message", {
                         username: "Erro",
-                        message: "Desculpe, não consegui obter uma imagem de Pokémon."
+                        message: "Desculpe, não consegui obter uma imagem de Pokémon.",
                     });
                 }
             } else {
@@ -218,35 +216,37 @@ module.exports = (io) => {
             }
         });
 
-        socket.on("playSound", (command) => {
-            let sound;
-            switch (command) {
-                case "/miau":
-                    sound = new Audio("/sounds/gato-miando.mp3");
-                    break;
-                case "/risada":
-                    sound = new Audio("/sounds/gato-rindo.mp3");
-                    break;
-                case "/mario":
-                    sound = new Audio("/sounds/super-mario-death.mp3");
-                    break;
-                case "/aplausos":
-                    sound = new Audio("/sounds/aplausos.mp3");
-                    break;
-                case "/neymar":
-                    sound = new Audio("/sounds/boa-tarde-neymar.mp3");
-                    break;
-            }
-
-            if (sound) {
-                sound.play();
-            }
-        });
-
         socket.on("disconnect", () => {
             console.log("Usuário desconectado " + socket.id);
             users = users.filter((user) => user !== socket.username);
             io.emit("userList", users);
+        });
+
+        // Emite o som para o cliente baseado no comando recebido
+        socket.on("message", (data) => {
+            if (data.message === "/fox") {
+                socket.emit("playSound", "/sounds/fox.mp3");
+            } else if (data.message === "/dog") {
+                socket.emit("playSound", "/sounds/dog.mp3");
+            } else if (data.message === "/cat") {
+                socket.emit("playSound", "/sounds/cat.mp3");
+            }
+
+            // Outros comandos de som podem ser adicionados aqui
+            if (data.message === "/miau") {
+                socket.emit("playSound", "/sounds/gato-miando.mp3");
+            } else if (data.message === "/risada") {
+                socket.emit("playSound", "/sounds/gato-rindo.mp3");
+            } else if (data.message === "/mario") {
+                socket.emit("playSound", "/sounds/super-mario-death.mp3");
+            } else if (data.message === "/aplausos") {
+                socket.emit("playSound", "/sounds/aplausos.mp3");
+            } else if (data.message === "/neymar") {
+                socket.emit("playSound", "/sounds/boa-tarde-neymar.mp3");
+            }
+
+            // Envia a mensagem
+            io.emit("message", data);
         });
     });
 };
