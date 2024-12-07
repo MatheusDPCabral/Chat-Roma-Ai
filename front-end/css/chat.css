@@ -301,3 +301,7 @@ body:not(.dark-mode) .dropdown .btn {
     padding: 10px;
   }
 }
+.chat-box {
+  overflow-y: auto; /* Habilita a rolagem vertical */
+  height: 400px;    /* Define uma altura fixa ou relativa */
+}

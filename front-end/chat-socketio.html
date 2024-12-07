@@ -51,6 +51,9 @@
             const ul = document.getElementById("messagesList");
             const li = document.createElement("li");
 
+            ul.appendChild(li);
+            scrollToBottom();
+
             const nameDiv = document.createElement("div");
             nameDiv.classList.add("username");
             nameDiv.textContent =
@@ -165,6 +168,10 @@
             }
         });
 
+        function scrollToBottom() {
+    const ul = document.getElementById("messagesList");
+    ul.scrollTop = ul.scrollHeight;
+}
         function toggleDarkMode() {
             document.body.classList.toggle("dark-mode");
         }
