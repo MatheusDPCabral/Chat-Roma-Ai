@@ -38,7 +38,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        const socket = io("https://super-space-fiesta-r97xv6gjgw53pqw7-4001.app.github.dev/"); // Atualize o URL para o servidor local, se necessário
+        const socket = io("https://bug-free-funicular-wrg4vw6rxg7hprq-4001.app.github.dev/"); // Atualize o URL para o servidor local, se necessário
         let onlineUsers = [];
 
         // Carrega o nome de usuário da URL
@@ -87,15 +87,15 @@
 
                 // Verificando comandos e tocando os sons correspondentes
                 if (msg.message === "/fox") {
-                    socket.emit("playSound", "/sounds/fox.mp3"); // Enviar para o servidor o evento para tocar o som da raposa
+                    const sound = new Audio('/sounds/raposa.mp3');
+                    sound.play(); // Enviar para o servidor o evento para tocar o som da raposa
                 } else if (msg.message === "/dog") {
-                    socket.emit("playSound", "/sounds/dog.mp3"); // Enviar para o servidor o evento para tocar o som do cachorro
-                } else if (msg.message === "/cat") {
-                    socket.emit("playSound", "/sounds/cat.mp3"); // Enviar para o servidor o evento para tocar o som do gato
+                    const sound = new Audio('/sounds/cachorro-latindo.mp3');
+                    sound.play() // Enviar para o servidor o evento para tocar o som do cachorro // Enviar para o servidor o evento para tocar o som do gato
                 }
 
                 // Adiciona a lógica para reprodução de sons
-                if (msg.message === "/miau") {
+                if (msg.message === "/cat") {
                     const sound = new Audio('/sounds/gato-miando.mp3');
                     sound.play();
                 } else if (msg.message === "/risada") {

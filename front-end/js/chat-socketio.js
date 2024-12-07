@@ -88,6 +88,7 @@ module.exports = (io) => {
                 io.emit("message", {
                     username: msg.username,
                     message: msg.message,
+                    
                 });
 
                 try {
@@ -100,7 +101,7 @@ module.exports = (io) => {
                     });
 
                     // Emite o comando para o cliente tocar o som de raposa
-                    io.emit("playSound", "/sounds/raposa.mp3");
+                    
 
                 } catch (error) {
                     console.error("Erro ao se comunicar com a API de raposas:", error);
@@ -225,17 +226,16 @@ module.exports = (io) => {
         // Emite o som para o cliente baseado no comando recebido
         socket.on("message", (data) => {
             if (data.message === "/fox") {
-                socket.emit("playSound", "/sounds/fox.mp3");
+                socket.emit("playSound", "/sounds/raposa.mp3");
             } else if (data.message === "/dog") {
-                socket.emit("playSound", "/sounds/dog.mp3");
+                socket.emit("playSound", "/sounds/cachorro-latindo.mp3");
             } else if (data.message === "/cat") {
-                socket.emit("playSound", "/sounds/cat.mp3");
+                socket.emit("playSound", "/sounds/gato-miando.mp3");
             }
 
             // Outros comandos de som podem ser adicionados aqui
-            if (data.message === "/miau") {
-                socket.emit("playSound", "/sounds/gato-miando.mp3");
-            } else if (data.message === "/risada") {
+            if 
+             (data.message === "/risada") {
                 socket.emit("playSound", "/sounds/gato-rindo.mp3");
             } else if (data.message === "/mario") {
                 socket.emit("playSound", "/sounds/super-mario-death.mp3");
@@ -246,7 +246,6 @@ module.exports = (io) => {
             }
 
             // Envia a mensagem
-            io.emit("message", data);
         });
     });
 };
