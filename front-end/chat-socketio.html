@@ -11,6 +11,10 @@
 </head>
 
 <body>
+    <div class="loading-spinner" id="loadingSpinner">
+        <div></div>
+    </div>
+    
     <div class="chat-container">
         <div class="card shadow-lg p-3 h-100">
             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -64,22 +68,7 @@
             const msgDiv = document.createElement("div");
             msgDiv.classList.add("message-content");
 
-            // Verificando se é um comando
-            if (msg.message === "/help") {
-                const helpMessage = `Comandos disponíveis:
-    /fox - Retorna uma imagem aleatória de raposa.
-    /dog - Retorna uma imagem aleatória de cachorro.
-    /cat - Retorna uma imagem aleatória de gato.
-    /pokemon - Retorna uma imagem aleatória de um Pokémon.
-    /image <descrição> - Gera uma imagem com base na descrição fornecida (utiliza a API do OpenAI).
-    /text <mensagem> - Responde com um texto gerado pela API do OpenAI com base na mensagem fornecida.
-    /miau - Toca o som de um gato miando.
-    /risada - Toca um som de risada.
-    /mario - Toca o som da morte do Mario no jogo.
-    /aplausos - Toca o som de aplausos.
-    /neymar - Toca o áudio com a frase "Boa tarde, Neymar!".`;
-                msgDiv.textContent = helpMessage; // Exibe a lista de comandos
-            } else if (msg.message.startsWith("http")) { // Verifica se é uma URL
+            if (msg.message.startsWith("http")) { // Verifica se é uma URL
                 const img = document.createElement("img");
                 img.src = msg.message;
                 img.alt = "Imagem gerada";
