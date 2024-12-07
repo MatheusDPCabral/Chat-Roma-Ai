@@ -253,7 +253,7 @@ module.exports = (io) => {
         socket.on("playSound", (command) => {
             let sound;
             switch (command) {
-                case "/miau":
+                case "/miau
                     sound = new Audio("/sounds/gato-miando.mp3");
                     break;
                 case "/risada":
